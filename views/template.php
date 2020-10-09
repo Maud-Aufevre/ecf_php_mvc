@@ -23,7 +23,7 @@
     </ul>
     
     <ul id="logoEntete">
-        <li><a href="index.php?action=list_art"><img src="./assets/images/logo-blog-trotteurs.jpg" alt="logo blog trotteurs"/></a></li>
+        <li><a href="index.php"><img src="./assets/images/logo-blog-trotteurs.jpg" alt="logo blog trotteurs"/></a></li>
         <li>le plein d'idées et d'expériences pour créer vos propres voyages ...</li>
     </ul>
 
@@ -36,14 +36,31 @@
         <nav>
             <ul id="menu">
             
-                <li><a id="navAccueil" activeClass="active" href="../admin/index.php">Accueil</a></li>
-                <li><a id="navContact"  activeClass="active" href="../admin/index_admin.php">Administration</a></li>
+                <li><a id="navAccueil" activeClass="active" href="index.php">Accueil</a></li>
+
+                <?php if(isset($_SESSION['Auth'])){ ?>
+                <li class="nav-item dropdown ml-auto">
+                    <a class="nav-link dropdown-toggle text-body" href="#" id="navbardrop" data-toggle="dropdown" ><NavLink activeClassName="active">Administration</NavLink>
+                    </a>
+                
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="index.php?action=list_cont">Zones géographiques</a>
+                    <a class="dropdown-item" href="index.php?action=list_art">Articles</a>
+                        <?php if($_SESSION['Auth']->Droits == 1){ ?>
+                    <a class="dropdown-item" href="index.php?action=list_user">Utilisateurs</a>
+                    <?php } ?>
+                    </div>
+                </li>
+                <?php } ?>
+
                 <li class="nav-item dropdown ml-auto">
                     <a class="nav-link dropdown-toggle text-body" href="#" id="navbardrop" data-toggle="dropdown" ><NavLink activeClassName="active"><i class="fa fa-power-off" style="font-size:24px"></i></NavLink>
                     </a>
                 
                     <div class="dropdown-menu">
+
                         <a class="dropdown-item" href="index.php?action=admin">Connexion</a>
+
                     <a class="dropdown-item" href="index.php?action=logout">Déconnexion</a>
                     </div>
                 </li>
@@ -56,7 +73,7 @@
     <footer id="piedPage">
         <main id="piedPageBlanc">
             <div id="logoPied">
-                <a href="index.php?action=list_art"><img src="./assets/images/logo-blog-trotteurs.jpg" alt="logo blog-trotteurs"/></a>
+                <a href="index.php"><img src="./assets/images/logo-blog-trotteurs.jpg" alt="logo blog-trotteurs"/></a>
             </div>
             <p>suivez-nous sur :</p>
             <ul id="réseauxSociauxPied">

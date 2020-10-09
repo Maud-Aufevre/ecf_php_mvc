@@ -110,53 +110,11 @@ class AdminArticleModel extends Driver {
             $imageHD3 = $this->listArt($id)[0]->getImageHD3();
         }
 
-
-        // if($art->getImage() === ""){
- 
-        //     $sql = "UPDATE articles
-        //         SET Pays=? Type_trip=? Auteur=? Recit=? Recit1=? Recit2=? Recit3=? Image=? ImageHD1=? ImageHD2=? ImageHD3=? Id_continent=?
-        //         WHERE Id = ?";
-        //      $tabArt = [$art->getPays(),$art->getType_trip(),$art->getAuteur(),$art->getRecit(),$art->getRecit1(),$art->getRecit2(),$art->getRecit3(),
-        //      $this->listArt($id)[0]->getImage(),$art->getImageHD1(),$art->getImageHD2(),$art->getImageHD3(),
-        //      $art->getId_cont()];       
-        // }
-        // if($art->getImageHD1() === ""){
-            
-        //     $sql = "UPDATE articles
-        //         SET Pays=? Type_trip=? Auteur=? Recit=? Recit1=? Recit2=? Recit3=? Image=? ImageHD1=? ImageHD2=? ImageHD3=? Id_continent=?
-        //         WHERE Id = ?";
-        //      $tabArt = [$art->getPays(),$art->getType_trip(),$art->getAuteur(),$art->getRecit(),$art->getRecit1(),$art->getRecit2(),$art->getRecit3(),
-        //      $art->getImage(),$this->listArt($id)[0]->getImageHD1(),$art->getImageHD2(),$art->getImageHD3(),
-        //      $art->getId_cont()];       
-        // }
-        // if($art->getImageHD2() === ""){
-        //     $sql = "UPDATE articles
-        //         SET Pays=? Type_trip=? Auteur=? Recit=? Recit1=? Recit2=? Recit3=? Image=? ImageHD1=? ImageHD2=? ImageHD3=? Id_continent=?
-        //         WHERE Id = ?";
-        //      $tabArt = [$art->getPays(),$art->getType_trip(),$art->getAuteur(),$art->getRecit(),$art->getRecit1(),$art->getRecit2(),$art->getRecit3(),
-        //      $art->getImage(),$art->getImageHD1(),$this->listArt($id)[0]->getImageHD2(),$art->getImageHD3(),
-        //      $art->getId_cont()];       
-        // }
-        // if($art->getImageHD3() === ""){
-        //     $sql = "UPDATE articles
-        //         SET Pays=? Type_trip=? Auteur=? Recit=? Recit1=? Recit2=? Recit3=? Image=? ImageHD1=? ImageHD2=? ImageHD3=? Id_continent=?
-        //         WHERE Id = ?";
-        //      $tabArt = [$art->getPays(),$art->getType_trip(),$art->getAuteur(),$art->getRecit(),$art->getRecit1(),$art->getRecit2(),$art->getRecit3(),
-        //      $art->getImage(),$art->getImageHD1(),$art->getImageHD2(),$this->listArt($id)[0]->getImageHD3(),
-        //      $art->getId_cont()];       
-        // }
-        // if($art->getImage() !== "" && $art->getImageHD1() !== "" && $art->getImageHD2() !== "" && $art->getImageHD3() !== ""){
             $sql = "UPDATE articles
                     SET Pays=?, Type_trip=?, Auteur=?, Recit=?, Recit1=?, Recit2=?, Recit3=?, Image=?, ImageHD1=?, ImageHD2=?, ImageHD3=?, Id_continent=?
                     WHERE Id = ?";
             $tabArt = [$art->getPays(),$art->getType_trip(),$art->getAuteur(),$art->getRecit(),$art->getRecit1(),$art->getRecit2(),$art->getRecit3(),$image,$imageHD1,$imageHD2,$imageHD3,$art->getId_cont(),$art->getId_art()];
-            // var_dump($tabArt); die;
-        // }
 
-
-
-        // $res = $this->bd->prepare($sql);
-        // $res->execute($tabVeh);
         $res = $this->getRequest($sql,$tabArt);
         return $res->rowCount();
     }

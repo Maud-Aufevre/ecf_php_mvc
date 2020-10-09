@@ -1,6 +1,9 @@
 <?php
 require_once('./controllers/admin/AdminContinentController.php');
 require_once('./controllers/admin/AdminArticleController.php');
+require_once('./controllers/admin/AdminUserController.php');
+require_once('./controllers/admin/AuthController.php');
+require_once('./controllers/public/PublicController.php');
 
 class Router {
     private $ctrac;
@@ -9,6 +12,8 @@ class Router {
     public function __construct() {
         $this->ctrac = new AdminContinentController();
         $this->ctraa = new AdminArticleController();
+        $this->ctrau = new AdminUserController();
+        $this->ctrpub = new PublicController();
     }
 
     public function getPath() {
@@ -44,11 +49,33 @@ class Router {
                     case 'detail_art':
                         $this->ctraa->detailArticle();
                         break;
+                    case 'list_user':
+                        $this->ctrau->listUsers();   
+                        break;
+                    case 'add_user':
+                        $this->ctrau->insertUser();   
+                        break;
+                    case 'status':
+                        $this->ctrau->updateStatus();    
+                        break;
+                    case 'logout':
+                        AuthController::logout();   
+                        break;
+                    case 'admin':
+                        $this->ctrau->login();   
+                        break;
+                    case 'detail_article':
+                        $this->ctrpub->detailArticle();   
+                        break;
+
+                    default:
+                    throw new Exception('Url non définie');
+                    break;
                 }
             }
-            // else {
-            //     $this->ctrpub->getData();
-            // }
+            else {
+                $this->ctrpub->getData();
+            }
         }catch (Exception $e) {
             $this->page404($e->getMessage());
         }

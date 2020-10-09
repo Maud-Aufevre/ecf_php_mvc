@@ -16,9 +16,7 @@ ob_start();
             if($row[0]->getId_cont() != $art->getId_cont()){ ?> 
             <option value="<?=$art->getId_cont();?>">
             <?=$art->getNom_cont();?></option>
-        <?php }} ?><?php foreach($datas as $art){ ?>  
-        <option value="<?=$art->getId_cont();?>"><?=$art->getNom_cont();?></option>
-        <?php } ?>
+        <?php }} ?>
         </select>
     </div>
     </div>

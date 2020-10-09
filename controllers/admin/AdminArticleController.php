@@ -17,6 +17,7 @@ class AdminArticleController {
     }
 
     public function listArticles() {
+        AuthController::islogged();
         if(isset($_POST['search'])){
             $search = trim(htmlentities(addslashes($_POST['search'])));
             $rows = $this->driver->listArt(null,$search);
@@ -31,7 +32,22 @@ class AdminArticleController {
         }
     }
 
+    public function detailArticle() {
+        AuthController::islogged();
+        $datas = $this->driver2->getContinents();
+
+    if(isset($_GET['id'])) {
+            $id = (int)$_GET['id'];
+            $row = $this->driver->listArt($id,null);
+            require_once('./views/admin/detailArt.php');
+        }else {
+            $row = $this->driver->listArt(null,null);
+            require_once('./views/admin/articlesList.php');
+        }
+    }
+
     public function suppArticle(){
+        AuthController::islogged();
         // var_dump($_GET); die;
         if(isset($_GET['image']) && isset($_GET['id'])){
             $image = $_GET['image'];
@@ -47,7 +63,7 @@ class AdminArticleController {
     }
 
     public function addArticle(){
-
+        AuthController::islogged();
         if(isset($_POST['soumis']) && !empty($_POST['pays']) && !empty($_POST['auteur'])){
             $pays = trim(htmlentities(addslashes($_POST['pays'])));
             $continent = trim(htmlentities(addslashes($_POST['cont'])));
@@ -99,6 +115,7 @@ class AdminArticleController {
 
 
     public function editArticle(){
+        AuthController::islogged();
         if(isset($_GET['id'])){
             $id = (int)$_GET['id'];
             $row = $this->driver->ListArt($id);
@@ -144,8 +161,7 @@ class AdminArticleController {
                 header('location:index.php?action=list_art');
             }
             }
-    
-            //render edit form
+
                 $datas = $this->driver2->getContinents();
                 require_once('./views/admin/editFormArt.php');
         }

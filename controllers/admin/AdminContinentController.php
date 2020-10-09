@@ -13,12 +13,14 @@ class AdminContinentController {
     }
 
     public function listContinents() {
+        AuthController::islogged();
         $donnees = $this->driver->getContinents();
         require_once('./views/admin/continentsList.php');
 
     }
 
     public function addContinent() {
+        AuthController::islogged();
         if(isset($_POST['ajout']) && !empty($_POST['zone'])){
             $nomCont = trim(htmlspecialchars($_POST['zone']));
             $newCont = new Continent();
@@ -32,6 +34,7 @@ class AdminContinentController {
     }
 
     public function deleteContinent($id) {
+        AuthController::islogged();
         $nb = $this->driver->suppCont($id);
         if($nb) {
             header('location:index.php?action=list_cont');
